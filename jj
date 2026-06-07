@@ -1,0 +1,69 @@
+function calcular(){
+
+let precioAnterior =
+parseFloat(document.getElementById("precioAnterior").value);
+
+let precioActual =
+parseFloat(document.getElementById("precioActual").value);
+
+let cantidad =
+parseFloat(document.getElementById("cantidad").value);
+
+let semanas =
+parseFloat(document.getElementById("semanas").value);
+
+if(
+isNaN(precioAnterior) ||
+isNaN(precioActual) ||
+isNaN(cantidad) ||
+isNaN(semanas)
+){
+alert("Complete todos los campos");
+return;
+}
+
+let incremento =
+precioActual - precioAnterior;
+
+let porcentaje =
+(incremento/precioAnterior)*100;
+
+let gastoAnterior =
+precioAnterior*cantidad*semanas;
+
+let gastoActual =
+precioActual*cantidad*semanas;
+
+let diferencia =
+gastoActual-gastoAnterior;
+
+document.getElementById("incremento").innerHTML =
+incremento.toFixed(2)+" Bs";
+
+document.getElementById("porcentaje").innerHTML =
+porcentaje.toFixed(2)+" %";
+
+document.getElementById("diferencia").innerHTML =
+diferencia.toFixed(2)+" Bs";
+
+document.getElementById("detalle").innerHTML =
+"<b>Producto:</b> "+document.getElementById("producto").value+
+"<br><br><b>Gasto Anterior:</b> "+gastoAnterior.toFixed(2)+" Bs"+
+"<br><br><b>Gasto Actual:</b> "+gastoActual.toFixed(2)+" Bs";
+
+let estado = "🟢 Aumento Bajo";
+
+if(porcentaje > 20){
+estado = "🟡 Aumento Moderado";
+}
+
+if(porcentaje > 50){
+estado = "🔴 Aumento Crítico";
+}
+
+document.getElementById("estado").innerHTML = estado;
+
+document.getElementById("barra").style.width =
+Math.min(porcentaje,100)+"%";
+
+}
